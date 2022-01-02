@@ -21,7 +21,7 @@ router.post('/register', extractFile, async (req, res) => {
     }
     try {
         const result = await cloudinary.uploader.upload(req.file.path);
-        console.log(result);
+        // console.log(result);
 
         // const urls = [];
         // const uploader = async (path) => await cloudinary.uploads(path, "profilePic");
