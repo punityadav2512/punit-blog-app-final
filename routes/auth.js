@@ -18,14 +18,15 @@ router.post('/register', extractFile, async (req, res) => {
     if (!req.body.password) {
         return res.json({ success: false, message: "You must provide a password" })
     }
-
+    const result = await cloudinary.uploader.upload(req.file.path);
 
     const url = req.protocol + '://' + req.get('host');
     let user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        profilePicPath: url + "/images/" + req.file.filename
+        // profilePicPath: url + "/images/" + req.file.filename
+        profilePicPath: result.secure_url
     });
     try {
         let createdUser = await user.save();

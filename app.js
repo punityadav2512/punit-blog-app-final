@@ -1,4 +1,5 @@
 const express = require('express');
+const AWS = require('aws-sdk');
 const cors = require('cors');
 const connectToDB = require('./config/db');
 const path = require('path');
