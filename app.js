@@ -2,9 +2,11 @@ const express = require('express');
 const AWS = require('aws-sdk');
 const cors = require('cors');
 const connectToDB = require('./config/db');
+// const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const auth = require('./routes/auth');
 const blogs = require('./routes/blogs');
+// const fs = require('fs');
 
 // initialize app
 const app = express();
@@ -17,10 +19,10 @@ connectToDB();
 
 // use middlewares
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
+app.use(express.json());
 
 
 app.use("/images", express.static(path.join(__dirname + '/images')));

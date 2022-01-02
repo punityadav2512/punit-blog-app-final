@@ -1,5 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
+const cloudinary = require('../middlewares/cloudinary');
+const fs = require('fs');
 const extractFile = require('../middlewares/file');
 const jwt = require('jsonwebtoken');
 const checkAuth = require('../middlewares/check-auth');
@@ -18,17 +20,27 @@ router.post('/register', extractFile, async (req, res) => {
     if (!req.body.password) {
         return res.json({ success: false, message: "You must provide a password" })
     }
-    const result = await cloudinary.uploader.upload(req.file.path);
-
-    const url = req.protocol + '://' + req.get('host');
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        // profilePicPath: url + "/images/" + req.file.filename
-        profilePicPath: result.secure_url
-    });
     try {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        console.log(result);
+
+        // const urls = [];
+        // const uploader = async (path) => await cloudinary.uploads(path, "profilePic");
+        // const { path } = req.file;
+        // const newPath = await uploader(path);
+        // urls.push(newPath);
+        // fs.unlinkSync(path);
+
+
+        const url = req.protocol + '://' + req.get('host');
+        let user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            // profilePicPath: url + "/images/" + req.file.filename
+            profilePicPath: result.secure_url
+        });
+
         let createdUser = await user.save();
         const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET, { expiresIn: '24h' });
         res.json({
