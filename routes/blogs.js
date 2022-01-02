@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const Blog = require('../models/blog');
 const extractBlog = require('../middlewares/file2');
+const cloudinary = require('../middlewares/cloudinary');
 // const jwt = require('jsonwebtoken');
 const checkAuth = require('../middlewares/check-auth');
 const router = express.Router();
@@ -18,12 +19,14 @@ router.post('/newBlog', checkAuth, extractBlog, async (req, res) => {
         return res.json({ success: false, message: "Blog creator is required" });
     }
 
+    const result = await cloudinary.uploader.upload(req.file.path);
     const url = req.protocol + '://' + req.get('host');
     let blog = new Blog({
         title: req.body.title,
         body: req.body.body,
         createdBy: req.body.createdBy,
-        imagePath: url + "/blogs/" + req.file.filename
+        // imagePath: url + "/blogs/" + req.file.filename
+        imagePath: result.secure_url
     });
 
     try {
