@@ -167,6 +167,8 @@ router.put('/updateProfile', checkAuth, async (req, res) => {
         }
 
         user.name = req.body.name;
+        user.branch = req.body.branch;
+        user.year = req.body.year;
 
         await user.save();
 
