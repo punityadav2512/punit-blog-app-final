@@ -143,6 +143,23 @@ router.get('/profile', checkAuth, async (req, res) => {
     }
 });
 
+router.delete('/deleteProfile', checkAuth, async (req, res) => {
+
+
+    try {
+        let user = await User.findOne({ _id: req.userData.userId });
+        if (!user) {
+            return res.json({ success: false, message: "User not found." });
+        }
+
+        await user.deleteOne({});
+        res.json({ success: true, message: "User deleted successfully." })
+    } catch (error) {
+        return res.json({ success: false, message: error });
+    }
+});
+
+
 router.get('/publicProfile/:email', async (req, res) => {
     if (!req.params.email) {
         return res.json({ success: false, message: "No email is provided." });
