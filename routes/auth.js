@@ -145,7 +145,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/profile', checkAuth, async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.userData.userId }).select('name email profilePicPath');
+        const user = await User.findOne({ _id: req.userData.userId }).select('name email branch year profilePicPath');
         if (!user) {
             return res.json({ success: false, message: "User not found!" });
         }
