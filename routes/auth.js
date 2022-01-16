@@ -37,7 +37,7 @@ router.post('/register', extractFile, async (req, res) => {
         const url = req.protocol + '://' + req.get('host');
         let user = new User({
             name: req.body.name,
-            name: req.body.branch,
+            branch: req.body.branch,
             year: req.body.year,
             email: req.body.email,
             password: req.body.password,
