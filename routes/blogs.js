@@ -134,12 +134,12 @@ router.put('/updateBlog', checkAuth, async (req, res) => {
 });
 
 
-router.delete('/deleteBlog/:id', checkAuth, async (req, res) => {
-    if (!req.params.id) {
-        return res.json({ success: false, message: "No blog id provided." });
+router.delete('/deleteBlog', checkAuth, async (req, res) => {
+    if (!req.body._id) {
+        return res.json({ success: false, message: "No blog ID is provided." });
     }
     try {
-        const blog = await Blog.findOne({ _id: req.params.id });
+        const blog = await Blog.findOne({ _id: req.body._id });
 
         if (!blog) {
             return res.json({ success: false, message: "No blog found." });
