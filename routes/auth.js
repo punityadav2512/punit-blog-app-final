@@ -143,6 +143,28 @@ router.get('/profile', checkAuth, async (req, res) => {
     }
 });
 
+router.put('/updateProfile', checkAuth, async (req, res) => {
+    if (!req.body._id) {
+        return res.json({ success: false, message: "No user ID is provided." });
+    }
+    try {
+        let user = await User.findOne({ _id: req.userData.userId });
+        if (!user) {
+            return res.json({ success: false, message: "User is not authenticated." });
+        }
+
+        user.name = req.body.name;
+
+        await user.save();
+
+        res.json({ success: true, message: "User updated successfully" });
+
+
+    } catch (error) {
+        res.json({ success: false, message: error });
+    }
+})
+
 router.delete('/deleteProfile', checkAuth, async (req, res) => {
 
 
