@@ -13,6 +13,9 @@ router.post('/register', extractFile, async (req, res) => {
     if (!req.body.name) {
         return res.json({ success: false, message: "You must provide a name" })
     }
+    if (!req.body.branch) {
+        return res.json({ success: false, message: "You must provide a branch" })
+    }
     if (!req.body.email) {
         return res.json({ success: false, message: "You must provide an email" })
     }
@@ -34,6 +37,8 @@ router.post('/register', extractFile, async (req, res) => {
         const url = req.protocol + '://' + req.get('host');
         let user = new User({
             name: req.body.name,
+            name: req.body.branch,
+            year: req.body.year,
             email: req.body.email,
             password: req.body.password,
             // profilePicPath: url + "/images/" + req.file.filename
@@ -52,6 +57,8 @@ router.post('/register', extractFile, async (req, res) => {
             user: {
                 id: createdUser._id,
                 name: createdUser.name,
+                branch: createdUser.branch,
+                year: createdUser.year,
                 email: createdUser.email,
                 profilePicPath: createdUser.profilePicPath
             }
@@ -64,6 +71,12 @@ router.post('/register', extractFile, async (req, res) => {
         if (err.errors) {
             if (err.errors.name) {
                 return res.json({ success: false, message: err.errors.name.message })
+            }
+            if (err.errors.branch) {
+                return res.json({ success: false, message: err.errors.branch.message })
+            }
+            if (err.errors.year) {
+                return res.json({ success: false, message: err.errors.year.message })
             }
             if (err.errors.email) {
                 return res.json({ success: false, message: err.errors.email.message })

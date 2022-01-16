@@ -9,6 +9,19 @@ const userSchema = mongoose.Schema({
         ]
 
     },
+    branch: {
+        type: String,
+        required: true,
+        match: [
+            /^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/, "Please provide a valid branch",
+        ]
+
+    },
+    year: {
+        type: String,
+        required: true,
+
+    },
     email: {
         type: String,
         required: [true, "Please provide an email address"],
