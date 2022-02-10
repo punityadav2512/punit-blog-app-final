@@ -1,0 +1,27 @@
+<div class="container my-3">
+
+    <h2 class="page-header text-center">Profile Page</h2>
+
+    <div class="card mx-auto" style="max-width: 25rem;">
+        <img [src]="user?.profilePicPath" class="card-img-top" [alt]="user?.email">
+        <div>
+
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title"><strong>Name: </strong> {{user?.name}}</h5>
+            <h5 class="card-title"><strong>Email: </strong> {{user?.email}}</h5>
+            <h5 class="card-title"><strong>Branch: </strong> {{user?.branch}}</h5>
+            <h5 class="card-title"><strong>Year: </strong> {{user?.year}}</h5>
+            <a [routerLink]="['/edit-profile/', user?.email]"><button type="button" name="button"
+                    class="btn btn-sm btn-success m-2 px-4">Edit</button> </a>
+            <a (click)="deleteProfile()"><button type="button" name="button"
+                    class="btn btn-sm btn-danger m-2 px-4">Delete</button> </a>
+        </div>
+        <a routerLink="/" class="btn btn-primary">Go to home</a>
+    </div>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+</p-confirmDialog>
+
+<!-- [routerLink]="['/delete-user/', user?.email]" -->

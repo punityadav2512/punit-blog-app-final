@@ -1,0 +1,14 @@
+.web-footer{
+    padding: 1rem 0;
+    display: flex;
+    background: #3f51b5;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+.web-footer p{
+    color: white;
+    margin: 0;
+    padding: 0;
+}

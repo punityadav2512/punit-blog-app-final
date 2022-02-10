@@ -1,0 +1,246 @@
+<!-- <h1 class="card-header text-center bg-info mt-2 ">Blog Feed</h1> -->
+
+<p-toast></p-toast>
+<!-- <div class="row show-hide-message" *ngIf="message && newPost">
+    <div [ngClass]="messageClass">
+        {{message}}
+    </div>
+</div> -->
+
+<div class="center">
+    <button style="position: relative;" type="button" name="button" class="btn btn-success m-2 mb-4 mt-4"
+        *ngIf="!newPost" (click)="newBlogForm()">
+        <mat-icon style="position: absolute;">add</mat-icon>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        New Post
+    </button>
+    <button type="button" [disabled]="loadingBlogs" name="button" class="btn btn-warning m-2 mb-4 mt-4" *ngIf="!newPost"
+        (click)="reloadBlogs()">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
+            <path
+                d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />
+        </svg>&nbsp; -->
+        <mat-icon style="position: absolute;">restore</mat-icon>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Reload
+    </button>
+    <br />
+
+
+
+    <!-- new blog form starts -->
+
+
+    <div class=" card mt-2 mb-4 bg-light mx-auto" style="max-width: 600px;" *ngIf="newPost">
+        <div class="card-body ">
+
+
+            <!-- form started -->
+            <form [formGroup]="blogForm" (ngSubmit)="onBlogSubmit()">
+                <h4 class="card-title text-center">New Blog</h4>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title*</label>
+                    <input type="title"
+                        [ngClass]="{'is-invalid': (blogForm.get('title')?.touched && blogForm.get('title')?.invalid) , 'is-valid': !blogForm.get('title')?.errors}"
+                        class="form-control" id="title" formControlName="title">
+                    <span class="invalid-feedback">
+                        <span *ngIf="blogForm.get('title')?.hasError('required')">Title can't be blank.</span>
+                        <span *ngIf="blogForm.get('title')?.hasError('minlength')">Title must contain atleast 3
+                            characters</span>
+                        <span *ngIf="blogForm.get('title')?.hasError('maxlength')">Title shouldn't exceed 320
+                            characters</span>
+                    </span>
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image*</label>
+                    <input type="file" (change)="onImagePicked($event)" class="form-control" id="image"
+                        [ngClass]="{'is-invalid': blogForm.get('image')?.touched && blogForm.get('image')?.invalid, 'is-valid': !blogForm.get('image')?.errors}" />
+                    <span *ngIf="blogForm.get('image')?.hasError('required')" class="invalid-feedback">Please
+                        provide a blog image.</span>
+
+                </div>
+
+                <div class="profile-image-preview"
+                    *ngIf="imagePreview !== '' && imagePreview && blogForm.get('image')?.valid">
+                    <img [src]="imagePreview" [alt]="blogForm.value.title">
+                </div>
+
+
+
+
+                <div class="mb-3">
+                    <label for="body" class="form-label">Body*</label>
+                    <!-- <input type="body"
+                    [ngClass]="{'is-invalid': blogForm.get('body')?.touched && blogForm.get('body')?.invalid, 'is-valid': !blogForm.get('body')?.errors}"
+                    class="form-control" id="body" formControlName="body"> -->
+                    <textarea name="" id="body" cols="30" rows="10" formControlName="body"
+                        [ngClass]="{'is-invalid': blogForm.get('body')?.touched && blogForm.get('body')?.invalid, 'is-valid': !blogForm.get('body')?.errors}"
+                        class="form-control"></textarea>
+                    <span class="invalid-feedback">
+                        <span *ngIf="blogForm.get('body')?.hasError('required')">body can't be blank.</span>
+                        <span *ngIf="blogForm.get('body')?.hasError('minlength')">body must contain atleast
+                            3
+                            characters</span>
+                        <span *ngIf="blogForm.get('body')?.hasError('maxlength')">body must contain atmost
+                            500
+                            characters</span>
+
+
+                    </span>
+                </div>
+
+
+                <button type="submit" [disabled]="processing || blogForm.invalid"
+                    class="btn btn-success my-4 mx-auto me-2">Submit</button>
+                <button type="button" [disabled]="processing" class="btn btn-warning my-4 mx-auto ms-2"
+                    (click)="goBack()">Cancel</button>
+            </form>
+
+            <!-- form end -->
+
+        </div>
+    </div>
+
+
+    <!-- </div> -->
+
+    <div *ngIf="!newPost">
+        <div class="card mb-3" *ngFor="let blog of blogPosts">
+
+            <img [src]="blog?.imagePath" [alt]="blog?.title">
+            <h2 class="card-title">{{blog?.title}}</h2>
+
+            <p class="card-text">
+
+                {{blog.body}}
+            </p>
+
+            <div class="card-text footer">
+                <p class="card-text1"> <strong>Posted By: </strong>{{blog?.createdBy}}</p>
+
+                <p class="card-text1"> <strong>Date: </strong>
+                    {{blog?.createdAt | date: 'EEEE, dd MMM, yyyy'}}</p>
+
+                <!-- <strong>Time: </strong>
+                {{blog.createdAt | date: 'h:mm:ss a'}} -->
+                <!-- <br> -->
+                <div *ngIf="email === blog?.createdBy">
+                    <p class="card-text1"> <strong>Likes: </strong>{{blog?.likes}}
+
+                        <strong>DisLikes: </strong>{{blog?.dislikes}}
+                    </p>
+
+                    <!-- <p>
+                        <a class="btn btn-primary me-2" data-bs-toggle="collapse" href="#multiCollapseExample1"
+                            role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View Likes</a>
+                        <button class="btn btn-primary ms-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#multiCollapseExample2" aria-expanded="false"
+                            aria-controls="multiCollapseExample2">View Dislikes</button> -->
+                    <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target=".multi-collapse" aria-expanded="false"
+                                        aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button> -->
+                    <!-- </p> -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <div class="card card-body">
+                                    <a *ngFor="let liker of blog?.likedBy"
+                                        [routerLink]="['/user/', liker]">{{liker}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                <div class="card card-body">
+                                    <a *ngFor="let disliker of blog?.dislikedBy"
+                                        [routerLink]="['/user/', disliker]">{{disliker}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="email === blog?.createdBy"><button type="button"
+                        name="button" class="btn btn-sm btn-success m-2 px-4">Edit</button> </a>
+                <a (click)="deleteBlog(blog?._id)" *ngIf="email === blog?.createdBy"><button type="button" name="button"
+                        class="btn btn-sm btn-danger m-2 px-4">Delete</button> </a>
+                <!-- [routerLink]="['/delete-blog/', blog._id]" -->
+
+
+
+                <!-- LIkes -->
+                <div class="dropdown d-inline-block">
+                    <button [disabled]="blog?.likedBy.indexOf(email) > -1" type="button" name="button"
+                        class="btn btn-sm btn-success m-2 mt-3" *ngIf="email !== blog?.createdBy"
+                        (click)="likeBlog(blog._id)">
+                        <i class="bi bi-hand-thumbs-up"></i>&nbsp; Likes: {{blog?.likes}}
+
+                    </button>
+
+                    <!-- <div class="dropdown-content">
+                                    <a *ngFor="let liker of blog.likedBy" [routerLink]="['/user/', liker]">{{liker}}</a>
+            
+                                </div> -->
+                </div>
+
+                <!-- Dislikes -->
+                <div class="dropdown d-inline-block">
+                    <button [disabled]="blog?.dislikedBy.indexOf(email) > -1" type="button" name="button"
+                        class="btn btn-sm btn-danger m-2 mt-3" *ngIf="email !== blog?.createdBy"
+                        (click)="dislikeBlog(blog._id)">
+                        <!-- (click)="dislikeBlog(blog._id)" -->
+                        <i class="bi bi-hand-thumbs-up"></i>&nbsp; DisLikes: {{blog?.dislikes}}
+                    </button>
+
+
+                </div>
+                <!-- <div class="dropdown-content">
+                                    <a *ngFor="let disliker of blog.dislikedBy" [routerLink]="['/user/', disliker]">{{disliker}}</a>
+            
+                                </div> -->
+
+                <!-- <p *ngIf="email !==blog?.createdBy">
+                    <a class="likes btn btn-primary me-2" data-bs-toggle="collapse" href="#multiCollapseExample1"
+                        role="button" aria-expanded="false" aria-controls="multiCollapseExample1">View Likes</a>
+                    <button class="dislikes btn btn-primary ms-2 " type="button" data-bs-toggle="collapse"
+                        data-bs-target="#multiCollapseExample2" aria-expanded="false"
+                        aria-controls="multiCollapseExample2">View
+                        Dislikes</button> -->
+                <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target=".multi-collapse" aria-expanded="false"
+                                        aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button> -->
+                <!-- </p> -->
+                <div class="row" *ngIf="email !==blog?.createdBy">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body">
+                                <a *ngFor="let liker of blog?.likedBy" [routerLink]="['/user/', liker]">{{liker}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <div class="card card-body">
+                                <a *ngFor="let disliker of blog?.dislikedBy"
+                                    [routerLink]="['/user/', disliker]">{{disliker}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- footer end -->
+    </div>
+
+    <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+    </p-confirmDialog>
+
+    <!-- new blog form ends -->

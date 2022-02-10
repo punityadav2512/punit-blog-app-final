@@ -1,0 +1,72 @@
+<!-- <div class="container"> -->
+<p-toast></p-toast>
+<div class="card mt-4 mb-4 bg-light mx-auto" style="max-width: 600px;">
+    <div class="card-body ">
+        <h4 class="card-title text-center">Login</h4>
+
+
+        <!-- <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 300px;">
+                <i class="fa fa-google me-2"></i>
+                Signup via Google
+            </a>
+            <a routerLink="/signup" class="btn d-block btn-primary m-3 mx-auto" style="max-width: 300px;">
+                <i class="fa fa-facebook me-2"></i>
+                Signup via facebook
+            </a>
+    
+            <p class="divider mt-3 text-center">
+                <span>OR</span>
+            </p> -->
+
+
+        <!-- form started -->
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address*</label>
+                <input type="email"
+                    [ngClass]="{'is-invalid': (loginForm.get('email')?.touched && loginForm.get('email')?.invalid)}"
+                    class="form-control" id="email" formControlName="email">
+                <span class="invalid-feedback">
+                    <span *ngIf="loginForm.get('email')?.hasError('required')">Email can't be blank.</span>
+
+                </span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password*</label>
+                <input type="password"
+                    [ngClass]="{'is-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
+                    class="form-control" id="password" formControlName="password">
+                <span class="invalid-feedback">
+                    <span *ngIf="loginForm.get('password')?.hasError('required')">Password can't be blank.</span>
+                </span>
+            </div>
+
+
+
+            <button type="submit" [disabled]="loginForm.invalid || processing"
+                class="btn btn-success d-block mt-4 my-4 mx-auto" style="max-width: 300px;">Login</button>
+        </form>
+        <!-- form end -->
+        <p class="divider mt-3">
+            <span class="bg-light">OR</span>
+        </p>
+        <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 300px;">
+            <i class="fa fa-google me-2"></i>
+            Login via Google
+        </a>
+        <a routerLink="/signup" class="btn d-block btn-primary m-3 mx-auto" style="max-width: 300px;">
+            <i class="fa fa-facebook me-2"></i>
+            Login via facebook
+        </a>
+
+
+        <p class="text-center mt-3">Don't have an account? <a routerLink="/signup">signUp</a></p>
+
+
+
+    </div>
+</div>
+<!-- </div> -->

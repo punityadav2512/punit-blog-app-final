@@ -1,0 +1,32 @@
+/* .card{
+    /* background-color: #FF4081; */
+/* } */ 
+
+.divider{
+    position: relative;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.divider span{
+    position: relative;
+    padding: .5rem;
+    z-index: 5;
+}
+
+.divider:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #FF4081;
+    top: 50%;
+    left: 0%;
+    z-index: 4;
+}
+.profile-image-preview{
+    height: 5rem;
+    margin: 1rem 0;
+}
+.profile-image-preview img{
+    max-height: 100%;
+}

@@ -1,0 +1,175 @@
+<!-- <div class="container"> -->
+<p-toast></p-toast>
+
+<div class="card mt-2 mb-4 bg-light mx-auto" style="max-width: 600px;">
+    <div class="card-body ">
+        <h4 class="card-title text-center">Signup</h4>
+
+        <!-- form started -->
+        <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name*</label>
+                <input type="text"
+                    [ngClass]="{'is-invalid': (registerForm.get('name')?.touched && registerForm.get('name')?.invalid) , 'is-valid': !registerForm.get('name')?.errors}"
+                    class="form-control" id="name" formControlName="name">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('name')?.hasError('required')">Name can't be blank.</span>
+
+                    <span
+                        *ngIf="registerForm.get('name')?.hasError('required') ? null :registerForm.get('name')?.hasError('validateName')">Name
+                        must be valid</span>
+
+                </span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address*</label>
+                <input type="email"
+                    [ngClass]="{'is-invalid': (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) || (!emailValid && registerForm.get('email')?.touched), 'is-valid': !registerForm.get('email')?.errors && emailValid}"
+                    class="form-control" id="email" formControlName="email" (blur)="checkEmail()">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('email')?.hasError('required')">Email can't be blank.</span>
+                    <span *ngIf="registerForm.get('email')?.hasError('minlength')">Email must contain atleast 3
+                        characters</span>
+                    <span *ngIf="registerForm.get('email')?.hasError('maxlength')">Email shouldn't exceed 320
+                        characters</span>
+                    <span
+                        *ngIf="registerForm.get('email')?.hasError('required') || registerForm.get('email')?.hasError('minlength') || registerForm.get('email')?.hasError('maxlength') ? null :registerForm.get('email')?.hasError('validateEmail')">Email
+                        must be valid</span>
+                    <span
+                        *ngIf="registerForm.get('email')?.hasError('required') || registerForm.get('email')?.hasError('minlength') || registerForm.get('email')?.hasError('maxlength') ? null :( emailMessage != '' && emailMessage) ">{{emailMessage}}</span>
+
+
+                </span>
+
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Branch*</label>
+                <input type="text"
+                    [ngClass]="{'is-invalid': (registerForm.get('branch')?.touched && registerForm.get('branch')?.invalid) , 'is-valid': !registerForm.get('branch')?.errors}"
+                    class="form-control" id="branch" formControlName="branch">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('branch')?.hasError('required')">Branch can't be blank.</span>
+
+                    <span
+                        *ngIf="registerForm.get('branch')?.hasError('required') ? null :registerForm.get('branch')?.hasError('validateName')">Branch
+                        must be valid</span>
+
+                </span>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Year*</label>
+                <input type="text"
+                    [ngClass]="{'is-invalid': (registerForm.get('year')?.touched && registerForm.get('year')?.invalid) , 'is-valid': !registerForm.get('year')?.errors}"
+                    class="form-control" id="year" formControlName="year">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('year')?.hasError('required')">Year can't be blank.</span>
+
+                    <!-- <span
+                        *ngIf="registerForm.get('year')?.hasError('required') ? null :registerForm.get('year')?.hasError('validateName')">Year
+                        must be valid</span> -->
+
+                </span>
+
+            </div>
+
+            <!-- <div class="mb-3">
+                <label for="name" class="form-label">Name*</label>
+                <input type="text"
+                    [ngClass]="{'is-invalid': (registerForm.get('name')?.touched && registerForm.get('name')?.invalid) , 'is-valid': !registerForm.get('name')?.errors}"
+                    class="form-control" id="name" formControlName="name">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('name')?.hasError('required')">Name can't be blank.</span>
+
+                    <span
+                        *ngIf="registerForm.get('name')?.hasError('required') ? null :registerForm.get('name')?.hasError('validateName')">Name
+                        must be valid</span>
+
+                </span>
+
+            </div> -->
+
+
+            <div class="mb-3">
+                <label for="ProfilePic" class="form-label">Profile Image*</label>
+                <input type="file" (change)="onProfilePicPicked($event)" class="form-control" id="profilePic"
+                    [ngClass]="{'is-invalid': registerForm.get('profilePic')?.touched && registerForm.get('profilePic')?.invalid, 'is-valid': !registerForm.get('profilePic')?.errors}" />
+                <span *ngIf="registerForm.get('profilePic')?.hasError('required')" class="invalid-feedback">Please
+                    provide a profile image.</span>
+
+            </div>
+
+            <div class="profile-image-preview"
+                *ngIf="profileImagePreview !== '' && profileImagePreview && registerForm.get('profilePic')?.valid">
+                <img [src]="profileImagePreview" [alt]="registerForm.value.email">
+            </div>
+
+
+
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password*</label>
+                <input type="password"
+                    [ngClass]="{'is-invalid': registerForm.get('password')?.touched && registerForm.get('password')?.invalid, 'is-valid': !registerForm.get('password')?.errors}"
+                    class="form-control" id="password" formControlName="password">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('password')?.hasError('required')">Password can't be blank.</span>
+                    <span *ngIf="registerForm.get('password')?.hasError('minlength')">Password must contain atleast 8
+                        characters</span>
+
+                    <span
+                        *ngIf="registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('required') ? null : registerForm.get('password')?.hasError('validatePassword')">Password
+                        must contain an uppercase and a lowercase letter, a special character(symbol) and a number.
+                    </span>
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password*</label>
+                <input type="password"
+                    [ngClass]="{'is-invalid': (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) || (registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched), 'is-valid': !registerForm.get('confirmPassword')?.errors}"
+                    class="form-control" id="confirmPassword" formControlName="confirmPassword">
+                <span class="invalid-feedback">
+                    <span *ngIf="registerForm.get('confirmPassword')?.hasError('required')">This field is
+                        required.</span>
+                    <span
+                        *ngIf="registerForm.get('confirmPassword')?.hasError('required') ? null :registerForm.errors?.['mismatch']">Passwords
+                        must match.
+                    </span>
+
+                    <!-- <span *ngIf="registerForm.get('email')?.hasError('required')">Email must be valid</span> -->
+                </span>
+            </div>
+
+            <button type="submit" [disabled]="registerForm.invalid || processing || !emailValid"
+                class="btn btn-primary d-block mt-4 my-4 mx-auto" style="max-width: 300px;">Signup</button>
+        </form>
+
+        <!-- form end -->
+        <p class="divider mt-3">
+            <span class="bg-light">OR</span>
+        </p>
+        <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 300px;">
+            <i class="fa fa-google me-2"></i>
+            Signup via Google
+        </a>
+        <a routerLink="/signup" class="btn d-block btn-primary m-3 mx-auto" style="max-width: 300px;">
+            <i class="fa fa-facebook me-2"></i>
+            Signup via facebook
+        </a>
+
+
+        <p class="text-center mt-3">Already have an account? <a routerLink="/login">LogIn</a></p>
+
+
+
+    </div>
+</div>
+<!-- </div> -->

@@ -1,0 +1,51 @@
+<div class="user-container">
+    <p-toast></p-toast>
+
+    <!-- <div class="card">
+        <img class="card-img" src="./img/rome.jpg" alt="Rome" />
+        <div class="card-content">
+            <h1 class="card-header">Rome</h1>
+            <p class="card-text">
+                Rome is known for its stunning <strong> architecture</strong>,
+                with the Colleseum, Pantheon, and Trevi Fountain as the main
+                attractions.
+            </p>
+            <button class="card-btn">Visit <span>&rarr;</span></button>
+        </div>
+    </div>
+ -->
+
+    <div class="card" *ngFor="let user of users">
+        <div class="card-image">
+
+            <img class="card-img" [src]="user?.profilePicPath" [alt]="user?.email" />
+        </div>
+        <div class="card-content">
+            <h1 class="card-header">{{user?.name}}</h1>
+            <p class="card-text">
+                <strong>Email: </strong>{{user?.email}}
+                <br>
+                <strong>Branch: </strong>{{user?.branch}}
+                <br>
+                <strong>Year: </strong>{{user?.year}}
+                <!-- <strong>Email: </strong>{{user?.email}} -->
+                <!-- <strong>towering cliffs</strong>. -->
+            </p>
+            <button class="btn btn-primary" (click)="publicProfileView(user?.email)">View Details
+                <span>&rarr;</span></button>
+        </div>
+    </div>
+    <!-- 
+    <div class="card">
+        <img class="card-img" src="./img/maldives.jpg" alt="Maldives" />
+        <div class="card-content">
+            <h1 class="card-header">Maldives</h1>
+            <p class="card-text">
+                The Maldives are known for their
+                <strong>natural environment</strong> including the blue ocean,
+                white beaches, and clean air, attracting tourists.
+            </p>
+            <button class="card-btn">Visit <span>&rarr;</span></button>
+        </div>
+    </div> -->
+</div>

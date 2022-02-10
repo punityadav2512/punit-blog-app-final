@@ -1,0 +1,27 @@
+<div class="card mb-3 mt-5">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img [src]="user?.profilePicPath" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8" style="position: relative;">
+            <div class="card-body">
+                <h2 class="card-title">{{user?.name}} Profile Details</h2>
+                <p class="card-text">
+                    <strong>Name: </strong> {{user?.name}}
+                </p>
+                <p class="card-text">
+                    <strong>Email: </strong> {{user?.email}}
+                </p>
+                <p class="card-text">
+                    <strong>Branch: </strong> {{user?.branch}}
+                </p>
+                <p class="card-text mb-4">
+                    <strong>Year: </strong> {{user?.year}}
+                </p>
+
+            </div>
+            <a routerLink="/" class="btn btn-primary" style="position: absolute; bottom: 0;">Go to
+                home</a>
+        </div>
+    </div>
+</div>
