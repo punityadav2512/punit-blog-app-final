@@ -16,7 +16,9 @@ const blogSchema = mongoose.Schema({
         maxLength: [500, "Body must not be more than 500 characters"],
     },
     createdBy: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     },
     createdAt: {
         type: Date,

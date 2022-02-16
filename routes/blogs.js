@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/user');
+const { User } = require('../models/user');
 const Blog = require('../models/blog');
 const extractBlog = require('../middlewares/file2');
 const cloudinary = require('../middlewares/cloudinary');
@@ -9,6 +9,9 @@ const router = express.Router();
 
 
 router.post('/newBlog', checkAuth, extractBlog, async (req, res) => {
+    const createdBy = await User.findById(req.body.createdBy);
+    if (!createdBy) return res.status(400).send('Invalid User')
+
     if (!req.body.title) {
         return res.json({ success: false, message: "Blog title is required" });
     }
@@ -61,7 +64,7 @@ router.post('/newBlog', checkAuth, extractBlog, async (req, res) => {
 
 
 router.get('/allBlogs', async (req, res) => {
-    let blogs = await Blog.find({}).sort({ '_id': -1 });
+    let blogs = await Blog.find({}).sort({ '_id': -1 }).populate('createdBy');
     try {
         if (!blogs) {
             return res.json({ success: false, message: "No blogs created yet!" });
@@ -79,7 +82,7 @@ router.get('/singleBlog/:id', checkAuth, async (req, res) => {
         return res.json({ success: false, message: "No blog ID is provided" });
     }
     try {
-        const blog = await Blog.findOne({ _id: req.params.id });
+        const blog = await Blog.findOne({ _id: req.params.id }).populate('createdBy', 'email');
 
         if (!blog) {
             return res.json({ success: false, message: "No blog found!" });
@@ -89,8 +92,8 @@ router.get('/singleBlog/:id', checkAuth, async (req, res) => {
         if (!user) {
             return res.json({ success: false, message: "User is not authenticated." });
         }
-        if (user.email !== blog.createdBy) {
-            return res.json({ success: false, message: "You are not authorized to edit this blog." });
+        if (user.email !== blog.createdBy.email) {
+            return res.json({ success: false, message: "You are not authorized to view this blog." });
         }
         res.json({ success: true, blog: blog, message: "blog found" });
 
@@ -102,11 +105,17 @@ router.get('/singleBlog/:id', checkAuth, async (req, res) => {
 });
 
 router.put('/updateBlog', checkAuth, async (req, res) => {
+    // if (!mongoose.isValidObjectId(req.params.id)) {
+    //     return res.status(400).send('Invalid Id')
+    // }
+    // const createdBy = await User.findById(req.body.createdBy);
+    // if (!createdBy) return res.status(400).send('Invalid User')
+
     if (!req.body._id) {
         return res.json({ success: false, message: "No blog ID is provided." });
     }
     try {
-        let blog = await Blog.findOne({ _id: req.body._id });
+        let blog = await Blog.findOne({ _id: req.body._id }).populate('createdBy', 'email');
         if (!blog) {
             res.json({ success: false, message: "Blog id is not found" });
         };
@@ -115,7 +124,7 @@ router.put('/updateBlog', checkAuth, async (req, res) => {
             return res.json({ success: false, message: "User is not authenticated." });
         }
 
-        if (user.email !== blog.createdBy) {
+        if (user.email !== blog.createdBy.email) {
             return res.json({ success: false, message: "You are not authorized to edit this blog." });
         }
 
@@ -139,7 +148,7 @@ router.delete('/deleteBlog/:id', checkAuth, async (req, res) => {
         return res.json({ success: false, message: "No blog ID is provided." });
     }
     try {
-        const blog = await Blog.findOne({ _id: req.params.id });
+        const blog = await Blog.findOne({ _id: req.params.id }).populate('createdBy', 'email');
 
         if (!blog) {
             return res.json({ success: false, message: "No blog found." });
@@ -148,7 +157,7 @@ router.delete('/deleteBlog/:id', checkAuth, async (req, res) => {
         if (!user) {
             return res.json({ success: false, message: "You are not authenticated to delete this blog." });
         }
-        if (user.email !== blog.createdBy) {
+        if (user.email !== blog.createdBy.email) {
             return res.json({ success: false, message: "You are not authorized to delete this blog." });
         }
 

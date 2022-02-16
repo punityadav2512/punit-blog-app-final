@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/user');
+const { User } = require('../models/user');
 const cloudinary = require('../middlewares/cloudinary');
 const extractFile = require('../middlewares/file');
 const jwt = require('jsonwebtoken');
