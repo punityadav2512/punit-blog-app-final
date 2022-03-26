@@ -96,6 +96,14 @@
     object-fit: cover;
 }
 
+.profile-image{
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 1rem;
+    border-radius: 50%;
+    
+}
+
 @media screen and (max-width: 420px ){
     .card{
         width: 100%;

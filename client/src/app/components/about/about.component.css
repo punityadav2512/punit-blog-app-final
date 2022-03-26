@@ -1,14 +1,10 @@
-*{
-	margin:0px;
-	padding:0px;
-	box-sizing: border-box;
-	font-family: 'Poppins', sans-serif;
-}
+
 .section{
     margin: 2rem auto;
 	width: 100%;
 	min-height: 80vh;
-	background-color: rgb(243, 241, 241);
+	background-color: rgba(250, 249, 249, .98);
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .container{
 	width: 80%;

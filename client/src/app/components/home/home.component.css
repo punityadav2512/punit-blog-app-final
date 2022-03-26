@@ -1,50 +1,177 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-.user-container{
-    display: flex;
-    margin: 2rem auto;
-    flex-wrap: wrap;
-}
-.card{
-    display: flex;
-    margin: 2rem;
-    width: 22rem;
-
-   
-}
-/* .card-image{
-    height: 15rem;
-} */
-.card-img{
-    /* background-color: rgb(231, 233, 233); */
-    background-color: white;
+#hero {
+    margin-top:0;
     width: 100%;
-    height: 15rem;
-    object-fit: contain;
-}
+    min-height: 100vh;
+    position: relative;
+    /* background-image: url("../../../assets/images/jobsearch (1).png");
+    background-position: top center;
+    background-size: 100vw 7rem;
+    background-repeat: no-repeat;
+    background-attachment: scroll; */
+
+    /* background-size: contain; */
+
+  }
+  .header-background{
+      margin-top: -3rem;
+      width: 100%;
+      height: 90px;
+      background-image: url("../../../assets/images/jobsearch (1).png");
+      background-position: top center;
+      background-size: 70% 6rem;
+      background-repeat: no-repeat;
+      background-attachment: scroll;
+
+  }
+  #hero:before {
+    content: "";
+    /* background: rgba(255, 255, 255, 0.8); */
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  #hero .container {
+    padding-top: 80px;
+    /* padding-top: 0px; */
+  }
+  #hero h1 {
+
+    margin: 0;
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 72px;
+    color: #124265;
+    font-family: "Poppins", sans-serif;
+    color: rgb(61, 61, 71);
+  }
+  #hero h2 {
+    color: #5e5e5e;
+    margin: 10px 0 0 0;
+    font-size: 22px;
+  }
+  #hero .btn-get-started {
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    padding: 14px 50px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 30px;
+    color: #fff;
+    /* background: #2487ce; */
 
 
-.card-header{
-    font-size: 2em;
-    padding: .5rem 1rem;
+  }
+  #hero .btn-get-started:hover {
+    /* background: #3194db; */
+    background: #3f51b5;
 
-}
+  }
+  #hero .icon-boxes {
+    margin-top: 100px;
+  }
 
-.card-text{
-    padding: .5rem 1rem;
-}
+  #hero .icon-box {
+    padding: 50px 30px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    /* background:whitesmoke; */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 6px;
+    z-index: 1;
+    cursor: pointer;
+    border: .1px solid black;
 
-.btn{
-    margin: 1rem 1rem 2rem 1rem;
-    padding: .3rem .7rem;
-}
-
-@media screen and (max-width: 900px) {
-    .card{
-        margin: 2rem auto;
+  }
+  #hero .icon-box .title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  #hero .icon-box .title a {
+    color: #124265;
+    transition: 0.3s;
+  }
+  #hero .icon-box .description {
+    font-size: 15px;
+    line-height: 28px;
+    margin-bottom: 0;
+  }
+  #hero .icon-box .icon {
+    margin-bottom: 20px;
+    padding-top: 10px;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+    font-size: 36px;
+    line-height: 1;
+    color: #2487ce;
+  }
+  #hero .icon-box:hover {
+    transform: scale(1.03);
+    /* background-color: #2487ce; */
+    /* color: white; */
+  }
+  #hero .icon-box:hover .title a {
+    color: #2487ce;
+  }
+  @media (min-width: 1024px) {
+    #hero {
+      background-attachment: fixed;
     }
-}
+  }
+  @media (max-height: 800px) {
+    #hero {
+      height: auto;
+    }
+  }
+  @media (max-width: 992px) {
+    #hero {
+      height: auto;
+    }
+    #hero h1 {
+      font-size: 28px;
+      line-height: 36px;
+    }
+    #hero h2 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+  
+  /*--------------------------------------------------------------
+  # Sections General
+  --------------------------------------------------------------*/
+  section {
+    padding: 80px 0;
+    overflow: hidden;
+  }
+  
+  .section-bg {
+    background-color: #f8fbfe;
+  }
+  
+  .section-title {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  .section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 0;
+    color: #124265;
+  }
+  .section-title p {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #919191;
+  }

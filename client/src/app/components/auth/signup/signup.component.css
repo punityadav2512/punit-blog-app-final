@@ -2,6 +2,13 @@
     /* background-color: #FF4081; */
 /* } */ 
 
+.card{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 3rem;
+    padding: 2rem;
+/* background-color: rgb(252, 252, 252); */
+    /* background-color: rgb(252, 252, 252); */
+}
 .divider{
     position: relative;
     margin: 1rem 0;

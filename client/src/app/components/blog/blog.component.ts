@@ -24,6 +24,7 @@ export class BlogComponent implements OnInit {
   userProfilePic!: string;
   name!: string;
   like: boolean = true;
+  profile: any;
 
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private blogService: BlogService, private messageService: MessageService, private confirmationService: ConfirmationService, private activatedRoute: ActivatedRoute, private router: Router) {
@@ -34,6 +35,7 @@ export class BlogComponent implements OnInit {
     this.currentUrl = this.activatedRoute.snapshot.params;
     this.authService.getProfile().subscribe((profile) => {
       this.email = profile.user?.email;
+      this.profile = profile.user;
       // this.name = profile.user?.name;
     });
     this.getAllBlogs();
@@ -80,10 +82,10 @@ export class BlogComponent implements OnInit {
     //   email: this.blogForm.get('title')?.value, 
     //   password: this.blogForm.get('body')?.value,
     //   profilePic: this.blogForm.get('image')?.value,
-    //   createdBy: this.email
+    //   createdBy: this.profile
     // }
 
-    this.blogService.newBlog(this.blogForm.value.title, this.blogForm.value.body, this.blogForm.value.image, this.email).subscribe(
+    this.blogService.newBlog(this.blogForm.value.title, this.blogForm.value.body, this.blogForm.value.image, this.profile._id).subscribe(
       {
         next: (data) => {
           if (!data.success) {
@@ -171,7 +173,6 @@ export class BlogComponent implements OnInit {
 
   deleteBlog(id: string) {
     this.processing = true;
-    console.log(id);
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this blog?',
       header: 'Delete Blog',

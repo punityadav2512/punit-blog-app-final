@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { mimeType } from './mime-type.validator';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 
 @Component({
@@ -15,13 +16,59 @@ import { Location } from '@angular/common';
 
 
 export class SignupComponent implements OnInit {
-  profileImagePreview: string = "";
+  profileImagePreview: any;
   emailValid: boolean = false;
   emailMessage: string = '';
+  fileToReturn: any;
 
 
   registerForm!: FormGroup;
   processing: boolean = false;
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  // fileChangeEvent(event: any): void {
+  //   this.imageChangedEvent = event;
+  // }
+
+  base64ToFile(data, filename) {
+
+    const arr = data.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    // this.croppedImage = this.profileImagePreview;
+    // this.fileToReturn = this.base64ToFile(
+    //   event.base64,
+    //   this.imageChangedEvent.target.files[0].name,
+    // )
+    // return this.fileToReturn;
+    return this.croppedImage;
+
+
+  }
+  imageLoaded() {
+
+  }
+  cropperReady() {
+
+  }
+  loadImageFailed() {
+
+  }
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -146,6 +193,7 @@ export class SignupComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+
   onRegisterSubmit() {
     this.processing = true;
     this.disableForm();
@@ -169,7 +217,7 @@ export class SignupComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Success Message', detail: data.message });
           this.authSerivce.storeUserData(data.token, data.userEmail);
           setTimeout(() => {
-            this.router.navigate(['/blog']);
+            this.router.navigate(['/home']);
           }, 2000);
           //   timer(2000).toPromise().then(done => {
           //     this.location.back();

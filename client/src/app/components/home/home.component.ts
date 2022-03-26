@@ -37,4 +37,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onCardClick() {
+    this.router.navigate(['/jobs'])
+  }
+  onCardClick1() {
+    this.router.navigate(['/admission'])
+  }
 }

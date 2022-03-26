@@ -1,9 +1,9 @@
 <!-- <div class="container"> -->
 <p-toast></p-toast>
 
-<div class="card mt-2 mb-4 bg-light mx-auto" style="max-width: 600px;">
+<div class="card mt-2 mb-4 mx-auto" style="max-width: 600px;">
     <div class="card-body ">
-        <h4 class="card-title text-center">Signup</h4>
+        <h2 class="card-title text-center"> Signup</h2>
 
         <!-- form started -->
         <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
@@ -101,6 +101,10 @@
                 <label for="ProfilePic" class="form-label">Profile Image*</label>
                 <input type="file" (change)="onProfilePicPicked($event)" class="form-control" id="profilePic"
                     [ngClass]="{'is-invalid': registerForm.get('profilePic')?.touched && registerForm.get('profilePic')?.invalid, 'is-valid': !registerForm.get('profilePic')?.errors}" />
+                <!-- <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                </image-cropper> -->
                 <span *ngIf="registerForm.get('profilePic')?.hasError('required')" class="invalid-feedback">Please
                     provide a profile image.</span>
 
@@ -147,9 +151,10 @@
                     <!-- <span *ngIf="registerForm.get('email')?.hasError('required')">Email must be valid</span> -->
                 </span>
             </div>
+            <!-- [disabled]="registerForm.invalid || processing || !emailValid"  -->
 
-            <button type="submit" [disabled]="registerForm.invalid || processing || !emailValid"
-                class="btn btn-primary d-block mt-4 my-4 mx-auto" style="max-width: 300px;">Signup</button>
+            <button type="submit" class="btn btn-primary d-block mt-4 my-4 mx-auto"
+                style="max-width: 300px;">Signup</button>
         </form>
 
         <!-- form end -->

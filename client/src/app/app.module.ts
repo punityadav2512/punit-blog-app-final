@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ImageCropperModule } from 'ngx-image-cropper';
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
@@ -26,6 +27,10 @@ import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.compone
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MatIconModule } from '@angular/material/icon';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { AdmissionComponent } from './components/admission/admission.component';
+import { PracticeComponent } from './components/practice/practice.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +47,9 @@ import { MatIconModule } from '@angular/material/icon';
     DeleteBlogComponent,
     PublicProfileComponent,
     EditProfileComponent,
+    JobsComponent,
+    AdmissionComponent,
+    PracticeComponent
 
 
   ],
@@ -55,7 +63,8 @@ import { MatIconModule } from '@angular/material/icon';
     // FontAwesomeModule,
     ToastModule,
     ConfirmDialogModule,
-    MatIconModule
+    MatIconModule,
+    ImageCropperModule
 
 
   ],

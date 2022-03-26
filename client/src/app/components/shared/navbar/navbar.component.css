@@ -1,6 +1,14 @@
 .navbar{
    background-color: #3f51b5;
 
+   margin-bottom: 3rem;
+   /* background-color: #09f; */
+    /* position: fixed; */
+    /* width: 100%; */
+    /* z-index: 999; */
+    /* top: 0; */
+   /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+
 }
 a{
     color: white;

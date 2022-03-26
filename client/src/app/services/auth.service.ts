@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
-// import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { LoginUser } from '../models/loginUser';
 // import { RegisterUser } from '../models/registerUser';
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(name: string, branch: string, year: string, email: string, password: string, profilePic: File) {
+  registerUser(name: string, branch: string, year: string, email: string, password: string, profilePic: string) {
     const userData = new FormData();
     userData.append("name", name);
     userData.append("branch", branch);
