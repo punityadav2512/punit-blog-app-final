@@ -1,7 +1,4 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	box-sizing: border-box;
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -13,6 +10,7 @@
 	/* background-color: rgb(243, 241, 241); */
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	border-radius: 1rem;
+	z-index: 7;
 
 }
 

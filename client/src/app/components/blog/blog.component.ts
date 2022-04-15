@@ -126,8 +126,8 @@ export class BlogComponent implements OnInit {
   }
 
   goBack() {
-    // window.location.reload();
-    this.router.navigate(['/blog'])
+    window.location.reload();
+    // this.router.navigate(['/blog']);
   }
 
   enableNewBlogForm() {

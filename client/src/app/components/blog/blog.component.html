@@ -33,13 +33,13 @@
     <!-- new blog form starts -->
 
 
-    <div class=" card mt-2 mb-4 bg-light mx-auto" style="max-width: 600px;" *ngIf="newPost">
+    <div class=" card mt-2 mb-4 mx-auto px-3" style="max-width: 600px;" *ngIf="newPost">
         <div class="card-body ">
 
 
             <!-- form started -->
             <form [formGroup]="blogForm" (ngSubmit)="onBlogSubmit()">
-                <h4 class="card-title text-center">New Blog</h4>
+                <h2 class="card-title text-center">New Blog</h2>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title*</label>
                     <input type="title"
@@ -111,7 +111,7 @@
 
     <div *ngIf="!newPost">
         <div class="card mb-3" *ngFor="let blog of blogPosts">
-            <p class="card-text" style="background-color: whitesmoke;">
+            <p class="card-text" style="border-bottom: .2px solid rgb(210, 208, 208);">
                 <img class="profile-image" [src]="blog?.createdBy.profilePicPath" alt="">
                 {{blog.createdBy.name}}
             </p>
@@ -124,7 +124,7 @@
                 {{blog.body}}
             </p>
 
-            <div class="card-text footer">
+            <div class="card-text footer" style="border-radius: 1rem;">
                 <p class="card-text1"> <strong>Posted By: </strong>{{blog?.createdBy.email}}</p>
 
                 <p class="card-text1"> <strong>Date: </strong>
@@ -228,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col" style="border-radius: 1rem;">
                         <div class="collapse multi-collapse" id="multiCollapseExample2">
                             <div class="card card-body">
                                 <a *ngFor="let disliker of blog?.dislikedBy"

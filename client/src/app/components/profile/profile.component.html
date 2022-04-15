@@ -19,11 +19,11 @@
                     <strong>Year: </strong> {{user?.year}}
                 </p>
                 <a [routerLink]="['/edit-profile/', user?.email]"><button type="button" name="button"
-                        class="btn btn-sm btn-success mt-2 me-2 mb-5 px-4">Edit</button> </a>
+                        class="btn btn-sm btn-primary mt-2 me-2 mb-5 px-4">Edit</button> </a>
                 <a (click)="deleteProfile()"><button type="button" name="button"
                         class="btn btn-sm btn-danger mt-2 ms-2 mb-5 px-4">Delete</button> </a>
             </div>
-            <a routerLink="/" class="btn btn-primary" style="position: absolute; bottom: 0;">Go to home</a>
+            <a routerLink="/" class="btn btn-success" style="position: absolute; bottom: 0;">Go to home</a>
         </div>
     </div>
 </div>
