@@ -1,14 +1,16 @@
 <!-- <div class="container"> -->
 <p-toast></p-toast>
 
-<div class="card mt-2 mb-4 bg-light mx-auto" style="max-width: 600px;">
+<div class="card mt-4 mb-4 mx-auto" style="max-width: 600px;">
     <div class="card-body ">
-        <h4 class="card-title text-center">Signup</h4>
+        <strong>
+            <h1 class="card-title text-center">Signup</h1>
+        </strong>
 
         <!-- form started -->
         <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="name" class="form-label">Name*</label>
                 <input type="text"
                     [ngClass]="{'is-invalid': (registerForm.get('name')?.touched && registerForm.get('name')?.invalid) , 'is-valid': !registerForm.get('name')?.errors}"
@@ -25,7 +27,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="email" class="form-label">Email address*</label>
                 <input type="email"
                     [ngClass]="{'is-invalid': (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) || (!emailValid && registerForm.get('email')?.touched), 'is-valid': !registerForm.get('email')?.errors && emailValid}"
@@ -47,7 +49,7 @@
 
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="name" class="form-label">Branch*</label>
                 <input type="text"
                     [ngClass]="{'is-invalid': (registerForm.get('branch')?.touched && registerForm.get('branch')?.invalid) , 'is-valid': !registerForm.get('branch')?.errors}"
@@ -64,7 +66,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="name" class="form-label">Year*</label>
                 <input type="text"
                     [ngClass]="{'is-invalid': (registerForm.get('year')?.touched && registerForm.get('year')?.invalid) , 'is-valid': !registerForm.get('year')?.errors}"
@@ -97,13 +99,20 @@
             </div> -->
 
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="ProfilePic" class="form-label">Profile Image*</label>
                 <input type="file" (change)="onProfilePicPicked($event)" class="form-control" id="profilePic"
                     [ngClass]="{'is-invalid': registerForm.get('profilePic')?.touched && registerForm.get('profilePic')?.invalid, 'is-valid': !registerForm.get('profilePic')?.errors}" />
+                <!-- <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 4" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
+                </image-cropper> -->
                 <span *ngIf="registerForm.get('profilePic')?.hasError('required')" class="invalid-feedback">Please
                     provide a profile image.</span>
-
+                <!-- <div class="text-center col-md-4"> -->
+                <!-- <h5>Preview</h5> -->
+                <!-- <img [src]="croppedImage" /> -->
+                <!-- </div> -->
             </div>
 
             <div class="profile-image-preview"
@@ -114,7 +123,7 @@
 
 
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="password" class="form-label">Password*</label>
                 <input type="password"
                     [ngClass]="{'is-invalid': registerForm.get('password')?.touched && registerForm.get('password')?.invalid, 'is-valid': !registerForm.get('password')?.errors}"
@@ -131,7 +140,7 @@
                 </span>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="confirmPassword" class="form-label">Confirm Password*</label>
                 <input type="password"
                     [ngClass]="{'is-invalid': (registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid) || (registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched), 'is-valid': !registerForm.get('confirmPassword')?.errors}"
@@ -147,9 +156,10 @@
                     <!-- <span *ngIf="registerForm.get('email')?.hasError('required')">Email must be valid</span> -->
                 </span>
             </div>
+            <!-- [disabled]="registerForm.invalid || processing || !emailValid"  -->
 
-            <button type="submit" [disabled]="registerForm.invalid || processing || !emailValid"
-                class="btn btn-primary d-block mt-4 my-4 mx-auto" style="max-width: 300px;">Signup</button>
+            <button type="submit" class="btn btn-primary d-block mt-4 my-4 mx-auto"
+                style="max-width: 300px;">Signup</button>
         </form>
 
         <!-- form end -->

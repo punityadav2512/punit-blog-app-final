@@ -7,6 +7,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
 import { HomeComponent } from './components/home/home.component';
+import { ImageComponent } from './components/image/image.component';
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'user/:email', component: PublicProfileComponent, canActivate: [AuthGuard] },
-  { path: 'edit-profile/:email', component: EditProfileComponent, canActivate: [AuthGuard] }
+  { path: 'edit-profile/:email', component: EditProfileComponent, canActivate: [AuthGuard] },
+  { path: 'image', component: ImageComponent }
   // { path: 'delete-user/:email', component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 

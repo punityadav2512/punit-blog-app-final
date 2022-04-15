@@ -1,8 +1,10 @@
 <!-- <div class="container"> -->
 <p-toast></p-toast>
-<div class="card mt-4 mb-4 bg-light mx-auto" style="max-width: 600px;">
+<div class="card mt-4 mb-4 mx-auto" style="max-width: 550px;">
     <div class="card-body ">
-        <h4 class="card-title text-center">Login</h4>
+        <strong>
+            <h1 class="card-title text-center">Login</h1>
+        </strong>
 
 
         <!-- <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 300px;">
@@ -21,7 +23,7 @@
 
         <!-- form started -->
         <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="email" class="form-label">Email address*</label>
                 <input type="email"
                     [ngClass]="{'is-invalid': (loginForm.get('email')?.touched && loginForm.get('email')?.invalid)}"
@@ -34,7 +36,7 @@
             </div>
 
 
-            <div class="mb-3">
+            <div class="mb-3 px-3">
                 <label for="password" class="form-label">Password*</label>
                 <input type="password"
                     [ngClass]="{'is-invalid': loginForm.get('password')?.touched && loginForm.get('password')?.invalid}"
@@ -47,23 +49,23 @@
 
 
             <button type="submit" [disabled]="loginForm.invalid || processing"
-                class="btn btn-success d-block mt-4 my-4 mx-auto" style="max-width: 300px;">Login</button>
+                class="btn btn-success d-block mt-4 px-4 my-4 mx-auto" style="max-width: 300px;">Login</button>
         </form>
         <!-- form end -->
         <p class="divider mt-3">
             <span class="bg-light">OR</span>
         </p>
-        <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 300px;">
+        <a routerLink="/signup" class="btn d-block btn-danger m-3 mx-auto" style="max-width: 250px;">
             <i class="fa fa-google me-2"></i>
             Login via Google
         </a>
-        <a routerLink="/signup" class="btn d-block btn-primary m-3 mx-auto" style="max-width: 300px;">
+        <a routerLink="/signup" class="btn d-block btn-primary m-3 mx-auto" style="max-width: 250px;">
             <i class="fa fa-facebook me-2"></i>
             Login via facebook
         </a>
 
 
-        <p class="text-center mt-3">Don't have an account? <a routerLink="/signup">signUp</a></p>
+        <p class="text-center mt-3">Don't have an account? <a routerLink="/signup">SignUp</a></p>
 
 
 

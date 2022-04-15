@@ -111,6 +111,10 @@
 
     <div *ngIf="!newPost">
         <div class="card mb-3" *ngFor="let blog of blogPosts">
+            <p class="card-text" style="background-color: whitesmoke;">
+                <img class="profile-image" [src]="blog?.createdBy.profilePicPath" alt="">
+                {{blog.createdBy.name}}
+            </p>
 
             <img [src]="blog?.imagePath" [alt]="blog?.title">
             <h2 class="card-title">{{blog?.title}}</h2>
@@ -121,7 +125,7 @@
             </p>
 
             <div class="card-text footer">
-                <p class="card-text1"> <strong>Posted By: </strong>{{blog?.createdBy}}</p>
+                <p class="card-text1"> <strong>Posted By: </strong>{{blog?.createdBy.email}}</p>
 
                 <p class="card-text1"> <strong>Date: </strong>
                     {{blog?.createdAt | date: 'EEEE, dd MMM, yyyy'}}</p>
@@ -129,7 +133,7 @@
                 <!-- <strong>Time: </strong>
                 {{blog.createdAt | date: 'h:mm:ss a'}} -->
                 <!-- <br> -->
-                <div *ngIf="email === blog?.createdBy">
+                <div *ngIf="email === blog?.createdBy.email">
                     <p class="card-text1"> <strong>Likes: </strong>{{blog?.likes}}
 
                         <strong>DisLikes: </strong>{{blog?.dislikes}}
@@ -166,10 +170,10 @@
 
 
                 </div>
-                <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="email === blog?.createdBy"><button type="button"
-                        name="button" class="btn btn-sm btn-success m-2 px-4">Edit</button> </a>
-                <a (click)="deleteBlog(blog?._id)" *ngIf="email === blog?.createdBy"><button type="button" name="button"
-                        class="btn btn-sm btn-danger m-2 px-4">Delete</button> </a>
+                <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="email === blog?.createdBy.email"><button
+                        type="button" name="button" class="btn btn-sm btn-success m-2 px-4">Edit</button> </a>
+                <a (click)="deleteBlog(blog?._id)" *ngIf="email === blog?.createdBy.email"><button type="button"
+                        name="button" class="btn btn-sm btn-danger m-2 px-4">Delete</button> </a>
                 <!-- [routerLink]="['/delete-blog/', blog._id]" -->
 
 
@@ -177,7 +181,7 @@
                 <!-- LIkes -->
                 <div class="dropdown d-inline-block">
                     <button [disabled]="blog?.likedBy.indexOf(email) > -1" type="button" name="button"
-                        class="btn btn-sm btn-success m-2 mt-3" *ngIf="email !== blog?.createdBy"
+                        class="btn btn-sm btn-success m-2 mt-3" *ngIf="email !== blog?.createdBy.email"
                         (click)="likeBlog(blog._id)">
                         <i class="bi bi-hand-thumbs-up"></i>&nbsp; Likes: {{blog?.likes}}
 
@@ -192,7 +196,7 @@
                 <!-- Dislikes -->
                 <div class="dropdown d-inline-block">
                     <button [disabled]="blog?.dislikedBy.indexOf(email) > -1" type="button" name="button"
-                        class="btn btn-sm btn-danger m-2 mt-3" *ngIf="email !== blog?.createdBy"
+                        class="btn btn-sm btn-danger m-2 mt-3" *ngIf="email !== blog?.createdBy.email"
                         (click)="dislikeBlog(blog._id)">
                         <!-- (click)="dislikeBlog(blog._id)" -->
                         <i class="bi bi-hand-thumbs-up"></i>&nbsp; DisLikes: {{blog?.dislikes}}
@@ -216,7 +220,7 @@
                                         data-bs-target=".multi-collapse" aria-expanded="false"
                                         aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle both elements</button> -->
                 <!-- </p> -->
-                <div class="row" *ngIf="email !==blog?.createdBy">
+                <div class="row" *ngIf="email !==blog?.createdBy.email">
                     <div class="col">
                         <div class="collapse multi-collapse" id="multiCollapseExample1">
                             <div class="card card-body">

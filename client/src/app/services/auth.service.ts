@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  registerUser(name: string, branch: string, year: string, email: string, password: string, profilePic: File) {
+  registerUser(name: string, branch: string, year: string, email: string, password: string, profilePic: string) {
     const userData = new FormData();
     userData.append("name", name);
     userData.append("branch", branch);

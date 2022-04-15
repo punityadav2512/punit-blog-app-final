@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { mimeType } from './mime-type.validator';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 
 @Component({
@@ -15,20 +16,59 @@ import { Location } from '@angular/common';
 
 
 export class SignupComponent implements OnInit {
-  profileImagePreview: string = "";
+  profileImagePreview: any;
   emailValid: boolean = false;
   emailMessage: string = '';
+  fileToReturn: any;
 
 
   registerForm!: FormGroup;
   processing: boolean = false;
+
+  // imageChangedEvent: any = '';
+  // croppedImage: any = '';
+
+  // fileChangeEvent(event: any): void {
+  //   this.imageChangedEvent = event;
+  // }
+
+  // base64ToFile(data, filename) {
+
+  //   const arr = data.split(',');
+  //   const mime = arr[0].match(/:(.*?);/)[1];
+  //   const bstr = atob(arr[1]);
+  //   let n = bstr.length;
+  //   let u8arr = new Uint8Array(n);
+
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+
+  //   return new File([u8arr], filename, { type: mime });
+  // }
+
+  // imageCropped(event: ImageCroppedEvent) {
+  //   this.croppedImage = event.base64;
+  // }
+  // imageLoaded() {
+  //   // show cropper
+  //   console.log("image loaded");
+
+  // }
+  // cropperReady() {
+  //   console.log('cropper ready')
+  // }
+  // loadImageFailed() {
+  //   console.log("error");
+
+  // }
+
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private authSerivce: AuthService,
     private messageService: MessageService,
-    private location: Location
   ) {
 
   }
@@ -134,7 +174,43 @@ export class SignupComponent implements OnInit {
     }
   }
 
+
+  // base64ToFile(data, filename) {
+
+  //   const arr = data.split(',');
+  //   const mime = arr[0].match(/:(.*?);/)[1];
+  //   const bstr = atob(arr[1]);
+  //   let n = bstr.length;
+  //   let u8arr = new Uint8Array(n);
+
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+
+  //   return new File([u8arr], filename, { type: mime });
+  // }
+
+  // dataURItoBlob(dataURI) {
+  //   console.log(dataURI);
+  //   let imageData = this.croppedImage.compressed?.dataURL.toString();
+  //   let byteCharacters = Buffer.from(imageData?.replace(/^data:image\/(png|jpeg|jpg);base64,/, '')).toString('base64');
+  //   let byteNumbers = new Array(byteCharacters.length);
+  //   for (let i = 0; i < byteCharacters.length; i++) {
+  //     byteNumbers[i] = byteCharacters.charCodeAt(i);
+  //   }
+
+  //   let byteArray = new Uint8Array(byteNumbers);
+  //   var blob = new Blob([byteArray], {
+  //     type: undefined
+  //   });
+  //   return blob;
+  // }
+
+
   onProfilePicPicked(event: Event) {
+
+    // this.imageChangedEvent = event;
+
     const file = ((event.target as HTMLInputElement).files as FileList)[0];
     // const file = (event.target as HTMLInputElement).files;
     this.registerForm.patchValue({ profilePic: file });
